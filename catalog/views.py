@@ -1,3 +1,5 @@
+from django.db.models import Q
+from django.views import generic
 from django.shortcuts import render
 from .models import Book, Author, BookInstance, Genre
 
@@ -5,7 +7,10 @@ from .models import Book, Author, BookInstance, Genre
 def index(request):
     num_books = Book.objects.all().count()
     num_instance = BookInstance.objects.all().count()
-    num_instances_available = BookInstance.objects.filter(status__exact='a').count()
+    num_instances_available = BookInstance.objects.filter(
+        ~Q(status__exact='a'),
+
+    ).count()
     num_author = Author.objects.count()
     num_genres = Genre.objects.all().count()
 
@@ -20,3 +25,20 @@ def index(request):
             'num_genres': num_genres
         }
     )
+
+
+class BookListView(generic.ListView):
+    model = Book
+
+
+class BookDetailView(generic.DetailView):
+    model = Book
+
+
+class AuthorListView(generic.ListView):
+    model = Author
+
+
+class AuthorDetailView(generic.DetailView):
+    model = Author
+

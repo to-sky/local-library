@@ -1,3 +1,5 @@
+import random
+
 from django.db import models
 from django.urls import reverse
 import uuid
@@ -30,7 +32,7 @@ class Book(models.Model):
 
 
 class BookInstance(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4(), help_text="Unique ID for this particular book across whole library")
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Unique ID for this particular book across whole library")
     book = models.ForeignKey('Book', on_delete=models.SET_NULL, null=True)
     imprint = models.CharField(max_length=200)
     due_back = models.DateField(null=True, blank=True)
@@ -62,6 +64,9 @@ class Author(models.Model):
 
     def __str__(self):
         return f'{self.last_name}, {self.first_name}'
+
+    class Meta:
+        ordering = ['last_name']
 
 
 class Language(models.Model):
