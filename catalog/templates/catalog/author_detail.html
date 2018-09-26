@@ -2,5 +2,21 @@
 
 {% block content %}
     <h1>{{ author }}</h1>
+    <p>
+        <strong>Years of life: </strong>{{ author.day_of_birth }} -
+        {% if author.day_of_death %}
+            {{ author.day_of_death }}
+        {% else %}
+            Now
+        {% endif %}
+    </p>
+    <hr>
 
+    <h4>Books</h4>
+    <div class="content">
+        {% for book in author.book_set.all %}
+            <p><a href="{{ book.get_absolute_url }}">{{ book.title }}</a> | <small>{{ book.isbn }}</small></p>
+            <p>{{ book.summary }}</p>
+        {% endfor %}
+    </div>
 {% endblock %}
