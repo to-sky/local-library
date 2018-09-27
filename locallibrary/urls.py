@@ -24,10 +24,9 @@ from django.conf.urls import url
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('catalog/', include('catalog.urls')),
-]
 
-urlpatterns += [
     url(r'^$', RedirectView.as_view(url='/catalog/', permanent=True)),
+    url(r'^accounts/', include('django.contrib.auth.urls')),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
