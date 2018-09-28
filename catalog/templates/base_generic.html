@@ -53,6 +53,7 @@
                     {% if perms.catalog.can_mark_returned %}
                         <hr>
                         <a href="{% url 'all-borrowed' %}">All Borrowed</a>
+{#                        <a href="{% url 'renew-book-librarian' %}">Renew book librarian</a>#}
                     {% endif %}
 
                 {% endblock %}

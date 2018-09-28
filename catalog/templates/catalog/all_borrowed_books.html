@@ -8,6 +8,7 @@
         {% for bookinstance in bookinstance_list %}
             <li>
                 <a href="{% url 'book-detail' bookinstance.book.pk %}">{{ bookinstance.book.title }}</a> ({{ bookinstance.due_back }}) - {{ bookinstance.borrower.username }}
+                <a href="{% url 'renew-book-librarian' bookinstance.id %}">Renew</a>
             </li>
         {% endfor %}
         </ul>
